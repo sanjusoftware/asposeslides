@@ -1,10 +1,10 @@
 require 'spec_helper'
-require 'aspose4r/powerpoint'
+require 'asposeslides/powerpoint'
 
-describe 'Aspose4r::Powerpoint' do
+describe 'Asposeslides::Powerpoint' do
 
-  include Aspose4r
-  include Aspose4r::Powerpoint
+  include Asposeslides
+  include Asposeslides::Powerpoint
 
   context 'powerpoint' do
 

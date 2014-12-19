@@ -1,4 +1,4 @@
-module Aspose4r
+module Asposeslides
   module Powerpoint
 
     def create_ppt(file = nil)
