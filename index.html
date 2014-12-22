@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Asposeslides : Aspose slides is a gem that helps you use the aspose slides for JAVA (http://docs.aspose.com:8082/docs/display/slidesjava/Product+Overview) library from within your ruby/rails project.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Asposeslides</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/sanjusoftware/asposeslides">View on GitHub</a>
+
+          <h1 id="project_title">Asposeslides</h1>
+          <h2 id="project_tagline">Aspose slides is a gem that helps you use the aspose slides for JAVA (http://docs.aspose.com:8082/docs/display/slidesjava/Product+Overview) library from within your ruby/rails project.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/sanjusoftware/asposeslides/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/sanjusoftware/asposeslides/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="asposeslides" class="anchor" href="#asposeslides" aria-hidden="true"><span class="octicon octicon-link"></span></a>Asposeslides</h1>
+
+<p>Aspose slides is a gem that helps you use the aspose slides for JAVA (<a href="http://docs.aspose.com:8082/docs/display/slidesjava/Product+Overview">http://docs.aspose.com:8082/docs/display/slidesjava/Product+Overview</a>) library from within your ruby/rails project.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Add this line to your application's Gemfile:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s1"><span class="pl-pds">'</span>asposeslides<span class="pl-pds">'</span></span></pre></div>
+
+<p>And then execute:</p>
+
+<pre><code>$ bundle
+</code></pre>
+
+<p>Or install it yourself as:</p>
+
+<pre><code>$ gem install asposeslides
+</code></pre>
+
+<h2>
+<a id="usage--rails-app" class="anchor" href="#usage--rails-app" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage : Rails app</h2>
+
+<ul>
+<li>Create a file aspose.yml under app/config folder. This file specifies the path to your aspose slides for Java path. Put the following lines in that file:</li>
+</ul>
+
+<div class="highlight highlight-yaml"><pre><span class="pl-s1"><span class="pl-ent">development:</span></span>
+  <span class="pl-s1"><span class="pl-ent">jar_dir:</span> <span class="pl-s1">/path/to/your/asposeslides/jars/directory</span></span>
+<span class="pl-s1"><span class="pl-ent">test:</span></span>
+  <span class="pl-s1"><span class="pl-ent">jar_dir:</span> <span class="pl-s1">/path/to/your/asposeslides/jars/directory</span></span></pre></div>
+
+<ul>
+<li>Next you need to initialize the aspose library. Aspose is a paid library and therefor you need to buy the appropriate license and provide the path to the licensed java library to initialize the gem.</li>
+<li>Create a file called aspose.rb under the initializer app/config/initializers folder. Put the following lines in the file</li>
+</ul>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-s3">Asposeslides</span>.configure_aspose_slides <span class="pl-s3">YAML</span>.load(<span class="pl-s3">File</span>.read(<span class="pl-s1"><span class="pl-pds">'</span>config/aspose.yml<span class="pl-pds">'</span></span>))[<span class="pl-s3">Rails</span>.env]</pre></div>
+
+<ul>
+<li>Now is the time to include the required files for working with the powerpoint presentations. Following is an example of merging 2 presentations into one:</li>
+</ul>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-k">require</span> <span class="pl-s1"><span class="pl-pds">'</span>asposeslides<span class="pl-pds">'</span></span>
+<span class="pl-k">include</span> <span class="pl-vo">Asposeslides</span>
+<span class="pl-k">include</span> <span class="pl-s3">Asposeslides</span>::<span class="pl-vo">Powerpoint</span>
+initialize_aspose
+dest_ppt <span class="pl-k">=</span> <span class="pl-s3">File</span>.join(<span class="pl-s1"><span class="pl-pds">'</span>dest_template.pptx<span class="pl-pds">'</span></span>)
+src_ppt1 <span class="pl-k">=</span> <span class="pl-s3">File</span>.join(<span class="pl-s1"><span class="pl-pds">'</span>src_template1.pptx<span class="pl-pds">'</span></span>)
+src_ppt2 <span class="pl-k">=</span> <span class="pl-s3">File</span>.join(<span class="pl-s1"><span class="pl-pds">'</span>src_template2.pptx<span class="pl-pds">'</span></span>)
+merged_ppt <span class="pl-k">=</span> merge_ppts(dest_ppt, [{<span class="pl-c1">:ppt</span> =&gt; src_ppt1, <span class="pl-c1">:position</span> =&gt; <span class="pl-c1">2</span>, <span class="pl-c1">:replace</span> =&gt; <span class="pl-c1">true</span>}, {<span class="pl-c1">:ppt</span> =&gt; src_ppt2, <span class="pl-c1">:position</span> =&gt; <span class="pl-c1">5</span>, <span class="pl-c1">:replace</span> =&gt; <span class="pl-c1">true</span>}])
+merged_ppt.save(<span class="pl-s1"><span class="pl-pds">"</span>merged.pptx<span class="pl-pds">"</span></span>,<span class="pl-c1">3</span>)</pre></div>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<ol>
+<li>Fork it ( <a href="https://github.com/sanjusoftware/asposeslides/fork">https://github.com/sanjusoftware/asposeslides/fork</a> )</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create a new Pull Request</li>
+</ol>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Asposeslides maintained by <a href="https://github.com/sanjusoftware">sanjusoftware</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
