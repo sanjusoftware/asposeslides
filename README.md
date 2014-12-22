@@ -20,19 +20,19 @@ Or install it yourself as:
 
 ## Usage : Rails app
 
-1. Create a file aspose.yml under app/config folder. This file specifies the path to your aspose slides for Java path. Put the following lines in that file:
+* Create a file aspose.yml under app/config folder. This file specifies the path to your aspose slides for Java path. Put the following lines in that file:
 ```yaml
 development:
   jar_dir: /path/to/your/asposeslides/jars/directory
 test:
   jar_dir: /path/to/your/asposeslides/jars/directory
 ```
-2. Next you need to initialize the aspose library. Aspose is a paid library and therefor you need to buy the appropriate license and provide the path to the licensed java library to initialize the gem.
-3. Create a file called aspose.rb under the initializer app/config/initializers folder. Put the following lines in the file
+* Next you need to initialize the aspose library. Aspose is a paid library and therefor you need to buy the appropriate license and provide the path to the licensed java library to initialize the gem.
+* Create a file called aspose.rb under the initializer app/config/initializers folder. Put the following lines in the file
 ```ruby
 Asposeslides.configure_aspose_slides YAML.load(File.read('config/aspose.yml'))[Rails.env]
 ```
-4. Now is the time to include the required files for working with the powerpoint presentations. Following is an example of merging 2 presentations into one:
+* Now is the time to include the required files for working with the powerpoint presentations. Following is an example of merging 2 presentations into one:
 ```ruby
 require 'asposeslides'
 include Asposeslides
