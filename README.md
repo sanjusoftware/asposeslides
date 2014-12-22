@@ -52,7 +52,7 @@ Lets understand the above code
 4. Next we have to start with initializing files that need to be merged. In this example, the dest_ppt, src_ppt1, src_ppt2 needs to be merged.
 5. The merge_ppts method, takes the dest_ppt and the src_ppts (1 and 2) and merge them together to generate a new ppt file. The src ppts can be provided with various options.
 
-### options for merge_ppts
+##### Options for merge_ppts
 * dest_ppt : this is the ppt in which you want merge other ppts
 * The second option is an array of src_ppt hashes. The hash is as follows
 ```ruby
@@ -61,6 +61,9 @@ Lets understand the above code
 * :ppt parameter represents the ppt that needs to be merged with dest_ppt.
 * :position parameter represents the index of the dest_ppt at which the slides form src_ppt needs to be inserted
 * :replace parameter (default false) indicates if you want to replace the slide in dest_ppt at the given position or not.
+
+## TODO
+* Extend the gem for other slide operations like add, delete, reorder etc
 
 ## Contributing
 
