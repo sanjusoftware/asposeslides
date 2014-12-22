@@ -63,6 +63,7 @@ Lets understand the above code
 * :replace parameter (default false) indicates if you want to replace the slide in dest_ppt at the given position or not.
 
 ## TODO
+* Make it work with the http urls of ppts
 * Extend the gem for other slide operations like add, delete, reorder etc
 
 ## Contributing
