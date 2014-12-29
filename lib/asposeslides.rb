@@ -10,9 +10,9 @@ module Asposeslides
   end
 
   def initialize_aspose
-    dir = Asposeslides.aspose_slides_config['jar_dir']
+    dir = Asposeslides.aspose_slides_config.present? ? Asposeslides.aspose_slides_config['jar_dir'] : nil
 
-    if File.exist?(dir)
+    if dir && File.exist?(dir)
       jardir = File.join(dir, '**', '*.jar')
     else
       logger = Logger.new(STDOUT)

@@ -20,6 +20,14 @@ describe 'Asposeslides::Powerpoint' do
       end
     end
 
+    context 'notes' do
+      it 'should give the notes for a given slide in a ppt' do
+        ppt_file = File.join(File.dirname(File.dirname(__FILE__)), 'spec', 'data', 'dest_template.pptx')
+        ppt = create_ppt(ppt_file)
+        expect(get_notes(ppt, 2)).to eq('NOTE1')
+      end
+    end
+
     context 'merge' do
       it 'should append given source presentation into destination presentation' do
         dest_ppt = File.join(File.dirname(File.dirname(__FILE__)), 'spec', 'data', 'dest_template.pptx')

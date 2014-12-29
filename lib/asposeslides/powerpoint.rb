@@ -5,6 +5,11 @@ module Asposeslides
       file ? Rjb::import('com.aspose.slides.Presentation').new(file) : Rjb::import('com.aspose.slides.Presentation').new
     end
 
+    def get_notes(ppt, index)
+      slide = ppt.getSlides().get_Item(index)
+      slide.getNotesSlide() ? slide.getNotesSlide().getNotesTextFrame().getText() : ''
+    end
+
     def merge_ppts(dest_ppt, src_ppt_options)
       destPres = create_ppt(dest_ppt)
       offset_position = 0
