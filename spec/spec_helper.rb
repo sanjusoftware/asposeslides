@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'bundler'
+require 'yaml'
 
 begin
   Bundler.setup(:default, :development)
@@ -12,3 +13,5 @@ end
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'Asposeslides'
+
+Asposeslides.configure_aspose_slides YAML.load(File.read('config/aspose.yml'))
