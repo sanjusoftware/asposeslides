@@ -28,28 +28,20 @@ describe 'Asposeslides::Powerpoint' do
       end
     end
 
-    context 'merge' do
+    context 'merge_ppt_files' do
       it 'should append given source presentation into destination presentation' do
         dest_ppt = File.join(File.dirname(File.dirname(__FILE__)), 'spec', 'data', 'dest_template.pptx')
-        src_ppt = File.join(File.dirname(File.dirname(__FILE__)), 'spec', 'data', 'src_template1.pptx')
+        src_ppt1 = File.join(File.dirname(File.dirname(__FILE__)), 'spec', 'data', 'src_template1.pptx')
 
         ppt1 = create_ppt(dest_ppt)
-        ppt2 = create_ppt(src_ppt)
+        ppt2 = create_ppt(src_ppt1)
 
-        merged_ppt = merge_ppts(dest_ppt, [{:ppt => src_ppt}])
+        merged_ppt = merge_ppt_files([dest_ppt, src_ppt1])
         expect(merged_ppt.getSlides().toArray().length).to eq(ppt1.getSlides().toArray().length + ppt2.getSlides().toArray().length)
       end
+    end
 
-      it 'should insert slides from source presentation into destination presentation at a given position' do
-        dest_ppt = File.join(File.dirname(File.dirname(__FILE__)), 'spec', 'data', 'dest_template.pptx')
-        src_ppt = File.join(File.dirname(File.dirname(__FILE__)), 'spec', 'data', 'src_template1.pptx')
-
-        ppt1 = create_ppt(dest_ppt)
-        ppt2 = create_ppt(src_ppt)
-
-        merged_ppt = merge_ppts(dest_ppt, [{:ppt => src_ppt, :position => 4}])
-        expect(merged_ppt.getSlides().toArray().length).to eq(ppt1.getSlides().toArray().length + ppt2.getSlides().toArray().length)
-      end
+    context 'merge_ppts_into_template' do
 
       it 'should replace a slide at a given position in destination presentation with slides from source presentation' do
         dest_ppt = File.join(File.dirname(File.dirname(__FILE__)), 'spec', 'data', 'dest_template.pptx')
@@ -58,7 +50,7 @@ describe 'Asposeslides::Powerpoint' do
         ppt1 = create_ppt(dest_ppt)
         ppt2 = create_ppt(src_ppt)
 
-        merged_ppt = merge_ppts(dest_ppt, [{:ppt => src_ppt, :position => 4, :replace => true}])
+        merged_ppt = merge_ppts_into_template(dest_ppt, [{:ppts => [src_ppt], :position => 4, :replace => true}])
         expect(merged_ppt.getSlides().toArray().length).to eq((ppt1.getSlides().toArray().length + ppt2.getSlides().toArray().length) - 1)
       end
 
@@ -71,11 +63,15 @@ describe 'Asposeslides::Powerpoint' do
         ppt2 = create_ppt(src_ppt1)
         ppt3 = create_ppt(src_ppt2)
 
-        merged_ppt = merge_ppts(dest_ppt, [{:ppt => src_ppt1, :position => 2, :replace => true}, {:ppt => src_ppt2, :position => 5, :replace => true}])
+        merged_ppt = merge_ppts_into_template(dest_ppt, [{:ppts => [src_ppt1], :position => 2, :replace => true}, {:ppts => [src_ppt2], :position => 5, :replace => true}])
         expect(merged_ppt.getSlides().toArray().length).to eq((ppt1.getSlides().toArray().length + ppt2.getSlides().toArray().length + ppt3.getSlides().toArray().length) - 2)
 
-        merged_ppt = merge_ppts(dest_ppt, [{:ppt => src_ppt1, :position => 2}, {:ppt => src_ppt2, :position => 5}])
+        merged_ppt = merge_ppts_into_template(dest_ppt, [{:ppts => [src_ppt1], :position => 2}, {:ppts => [src_ppt2], :position => 5}])
         expect(merged_ppt.getSlides().toArray().length).to eq((ppt1.getSlides().toArray().length + ppt2.getSlides().toArray().length + ppt3.getSlides().toArray().length))
+
+        merged_ppt = merge_ppts_into_template(dest_ppt, [{:ppts => [src_ppt1, src_ppt2], :position => 2, :replace => true}, {:ppts => [src_ppt2, src_ppt1], :position => 5, :replace => true}])
+        merged_ppt.save('merged_ppt.pptx', 3)
+        expect(merged_ppt.getSlides().toArray().length).to eq((ppt2.getSlides().toArray().length * 2) + (ppt3.getSlides().toArray().length * 2) + ppt1.getSlides().toArray().length - 2)
       end
     end
   end

@@ -41,7 +41,7 @@ initialize_aspose
 dest_ppt = File.join('dest_template.pptx')
 src_ppt1 = File.join('src_template1.pptx')
 src_ppt2 = File.join('src_template2.pptx')
-merged_ppt = merge_ppts(dest_ppt, [{:ppt => src_ppt1, :position => 2, :replace => true}, {:ppt => src_ppt2, :position => 5, :replace => true}])
+merged_ppt = merge_ppts(dest_ppt, [{:ppts => [src_ppt1], :position => 2, :replace => true}, {:ppts => [src_ppt2], :position => 5, :replace => true}])
 merged_ppt.save("merged.pptx",3)
 ```
 
@@ -56,7 +56,7 @@ Lets understand the above code
 * dest_ppt : this is the ppt in which you want merge other ppts
 * The second option is an array of src_ppt hashes. The hash is as follows
 ```ruby
-{:ppt => src_ppt1, :position => 2, :replace => true}
+{:ppts => [src_ppt1], :position => 2, :replace => true}
 ```
 * :ppt parameter represents the ppt that needs to be merged with dest_ppt.
 * :position parameter represents the index of the dest_ppt at which the slides form src_ppt needs to be inserted
