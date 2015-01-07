@@ -70,7 +70,6 @@ describe 'Asposeslides::Powerpoint' do
         expect(merged_ppt.getSlides().toArray().length).to eq((ppt1.getSlides().toArray().length + ppt2.getSlides().toArray().length + ppt3.getSlides().toArray().length))
 
         merged_ppt = merge_ppts_into_template(dest_ppt, [{:ppts => [src_ppt1, src_ppt2], :position => 2, :replace => true}, {:ppts => [src_ppt2, src_ppt1], :position => 5, :replace => true}])
-        merged_ppt.save('merged_ppt.pptx', 3)
         expect(merged_ppt.getSlides().toArray().length).to eq((ppt2.getSlides().toArray().length * 2) + (ppt3.getSlides().toArray().length * 2) + ppt1.getSlides().toArray().length - 2)
       end
     end
