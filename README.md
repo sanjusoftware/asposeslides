@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/asposeslides.svg)](http://badge.fury.io/rb/asposeslides)
+
 # Asposeslides
 
 Aspose slides is a gem that helps you use the aspose slides for JAVA (http://docs.aspose.com:8082/docs/display/slidesjava/Product+Overview) library from within your ruby/rails project. This library has been tested with aspose.slides-14.9.0
