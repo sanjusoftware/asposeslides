@@ -12,8 +12,9 @@ module Asposeslides
   def initialize_aspose
     aspose_jars_dir = Asposeslides.aspose_slides_config ? Asposeslides.aspose_slides_config['jar_dir'] : nil
     aspose_license_path = Asposeslides.aspose_slides_config ? Asposeslides.aspose_slides_config['license_path'] : nil
+    jvm_args = Asposeslides.aspose_slides_config ? Asposeslides.aspose_slides_config['jvm_args'] : nil
 
-    load_aspose_jars(aspose_jars_dir)
+    load_aspose_jars(aspose_jars_dir, jvm_args)
     load_aspose_license(aspose_license_path)
   end
 
@@ -27,13 +28,23 @@ module Asposeslides
     end
   end
 
-  def load_aspose_jars(aspose_jars_dir)
+  def load_aspose_jars(aspose_jars_dir, jvm_args)
     if aspose_jars_dir && File.exist?(aspose_jars_dir)
       jardir = File.join(aspose_jars_dir, '**', '*.jar')
     else
       jardir = File.join(File.dirname(File.dirname(__FILE__)), 'jars', '**', '*.jar')
     end
-    Rjb::load(classpath = Dir.glob(jardir).join(':'), jvmargs=['-Djava.awt.headless=true'])
+
+    if jvm_args
+      args = jvm_args.split(' ') << '-Djava.awt.headless=true'
+      logger = Logger.new(STDOUT)
+      logger.level = Logger::DEBUG
+      logger.debug("JVM args : #{args}")
+      Rjb::load(classpath = Dir.glob(jardir).join(':'), jvmargs=args)
+    else
+      Rjb::load(classpath = Dir.glob(jardir).join(':'), jvmargs=['-Djava.awt.headless=true'])
+    end
+
   end
 
   def input_file(file)

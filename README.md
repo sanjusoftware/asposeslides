@@ -20,14 +20,16 @@ Or install it yourself as:
 
 ## Usage : Rails app
 
-* Create a file aspose.yml under app/config folder. This file specifies the path to your aspose slides for Java path. Put the following lines in that file:
+* Create a file aspose.yml under app/config folder. This file specifies the path to your aspose slides for Java path, the license path and the jvm args if any. Put the following lines in that file:
 ```yaml
 development:
   jar_dir: /path/to/your/asposeslides/jars/directory
   license_path: /path/to/your/asposeslides/license/path
+  jvm_args: -Xms512m -Xmx1G
 test:
   jar_dir: /path/to/your/asposeslides/jars/directory
   license_path: /path/to/your/asposeslides/license/path
+  jvm_args: -Xms512m -Xmx1G
 ```
 * Next you need to initialize the aspose library. Aspose is a paid library and therefor you need to buy the appropriate license and provide the path to the licensed java library to initialize the gem.
 * Create a file called aspose.rb under the initializer app/config/initializers folder. Put the following lines in the file
